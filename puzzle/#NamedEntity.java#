@@ -1,0 +1,70 @@
+package puzzle;
+
+/** A utility class bundling a name with a type of entity.
+ *  @author
+ */
+class NamedEntity {
+
+    /** A NamedEntity with name NAME and type TYPE. */
+    NamedEntity(String name, EntityType type) {
+        _name = name;
+        _type = type;
+    }
+
+    /** Returns the name supplied to the constructor. */
+    String getName() {
+        return _name;
+    }
+
+    /** Returns the type supplied to the constructor. */
+    EntityType getType() {
+        return _type;
+    }
+
+    /** Return TRUE if getName() represents an unknown name returned
+     *  by makeName. */
+    boolean isAnonymous() {
+        return _name.contains("#");
+    }
+
+    /** Return TRUE if NAME represents an unknown name returned
+     *  by makeName. */
+    static boolean isAnonymous(String name) {
+        return name.contains("#");
+    }
+
+
+    /** Returns a new unknown ("anonymous") name prefixed with PREFIX. */
+    static String makeName(String prefix) {
+        _uid += 1;
+        return prefix + "#" + _uid;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        NamedEntity e = (NamedEntity) other;
+        return e._name.equals(_name) && e._type == _type;
+    }
+
+    /** Returns a hashcode for me, allowing NamedEntities to be used
+        in HashSets and HashMaps. */
+    @Override
+    public int hashCode() {
+        return _name.hashCode() * _type.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return _name;
+    }
+
+    /** The name supplied to the constructor. */
+    private final String _name;
+
+    /** The type supplied to the constructor. */
+    private final EntityType _type;
+
+    /** Used to generate unique anonymous names. */
+    private static int _uid;
+
+}

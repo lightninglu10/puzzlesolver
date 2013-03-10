@@ -1,0 +1,33 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.MatchResult;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+
+public class testzzzzz{
+    private static StringReader reader;
+
+    /** Set reader to contain the contents of LINES. */
+    private static void setUp(String... lines) {
+        StringBuilder str = new StringBuilder();
+        
+        for (String line : lines) {
+            str.append(line);
+            str.append("\n");
+        }
+        reader = new StringReader(str.toString());
+    }
+
+    public static void main(String[] args) {
+        setUp("John is   the carpenter.   "
+              + "Paul does not live in the yellow house.   ",
+              "  Who is   the\tcarpenter?");
+        Pattern Quest = Pattern.compile("[A-Z][a-z]+\\s+([a-z]+\\s+)*\\?");
+        Matcher mat = Quest.matcher("John is   the carpenter.   ");
+        if (mat.matches()) 	
+            System.out.printf ("'%s'", mat.group (1));
+        else
+            System.out.println ("no");
+    }
